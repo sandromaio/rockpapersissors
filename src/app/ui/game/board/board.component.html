@@ -1,0 +1,32 @@
+<div class="game-container">
+
+    <div class="game-hands">
+        <button class="w3-btn w3-ripple w3-green" *ngFor="let item of avalableList" (click)="doMove(handTypeEnum[item])">{{item}}</button>
+    </div>
+    <div class="game-action">
+        <ng-template [ngIf]="statusOfMove">
+            <section>
+                <div class="game-live">
+                    <ng-template [ngIf]="statusOfMove.playerOneWon">Player Won</ng-template>
+                    <ng-template [ngIf]="statusOfMove.playerTwoWon">Computer Won</ng-template>
+                    <ng-template [ngIf]="statusOfMove.drawWon">Draw </ng-template>
+
+                </div>
+                <div>({{statusOfMove.playerTwoWon ? 'with' : 'against' }} {{handTypeEnum[computerMove]}})</div>
+            </section>
+            <section class="game-stats">
+                <span><b>Player :</b> {{statusOfMove.playerOneWins}}</span><br/>
+                <span><b>Computer :</b> {{statusOfMove.playerTwoWins}}</span><br/>
+                <span><b>Draws :</b> {{statusOfMove.draws}}</span>
+            </section>
+        </ng-template>
+        <ng-template [ngIf]="!statusOfMove">
+            <h1>Select your move ...</h1>
+        </ng-template>
+    </div>
+    <hr/>
+    <footer class="play-button">
+        <button class="w3-btn w3-ripple w3-red" (click)="restart()">restart</button>
+    </footer>
+
+</div>
